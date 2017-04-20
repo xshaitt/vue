@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<ul id="app">
+    <li v-for="(item,index) in items">
+        {{index}}---{{item.message}}
+    </li>
+    第二个选项为当前的索引
+    <li v-for="(value,key,index) in object">
+        {{index}}---{{key}}---{{value}}
+    </li>
+    注意在使用对象的方式遍历时，是按object.keys()的结果的遍历的，所以并不能保证在不同的javascript引擎下的结果是一致的
+</ul>
+<div id="app-2">
+    <span v-for="n in 10"> {{n}} </span>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            items: [
+                {message: '第一行'},
+                {message: '第二行'},
+                {message: '第三行'},
+                {message: '第四行'}
+            ],
+            object: {
+                A: 'A',
+                B: 'B',
+                C: 'C',
+                D: 'D'
+            }
+        }
+    });
+    new Vue({
+        el: '#app-2'
+    });
+</script>
+</html>

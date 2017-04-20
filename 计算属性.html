@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+模板内提供了表达式的功能是非常便利的，但是实际上它们最好只是用于简单的计算，复杂的表达式交给专门的计算属性去做
+<div id="app">
+    {{message}}这是计算属性：{{xshaitt}}
+    <hr>
+    {{message}}Methods：{{cacheXshaitt()}}
+    <hr>
+    计算属性调用的是缓存，所以如果相关依赖不发生改变的话，那么计算属性返回的则将是上一次计算的结果，好好利用这一属性，会有奇效
+    {{now}}
+    <hr>
+    这个是观察者属性，当有一些数据会随着别的数据的变动而变动的话，可以设置观察者属性
+    {{fullName}}
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'xshaitt',
+            firstName: 'First',
+            lastName: 'Shuai',
+            fullName: 'First Shuai'
+        },
+        computed: {
+            xshaitt: function () {
+                return this.message + '+xttaish';
+                //如果对于某个属性我们需要处理过后才使用的话，那么我们可以把处理的方式放到计算属性方法里面，这一点与laravel的访问器类似
+            },
+            now: function () {
+                return Date.now();
+            },
+            fullName: {
+                //可以为计算属性设置访问器与修改器
+                get: function () {
+                    return this.firstName;
+                },
+                set: function (newValue) {
+                    this.firstName = newValue;
+                }
+            }
+        },
+        methods: {
+            cacheXshaitt: function () {
+                return this.message + '+xttaish';
+                //        注意即使计算属性与methods里面的属性归属与不同的元素，但也不能同名，methods的优先级要稍微高一点
+            }
+        }
+
+    });
+</script>
+</html>

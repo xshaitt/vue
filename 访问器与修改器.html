@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName}}----{{xsh}}
+    在我来看，所谓的计算属性就是虚拟出来的一个属性，而一般通过这个属性来组合或者计算别的属性来返回一个新的值
+    而之所以再搞一个访问器和修改器的原因应该是把对于这个虚拟属性赋值与获取值的操作分离开，这样解释也不准确，因为默认只有一个访问器，
+    如果需要在给虚拟属性赋值时做不一样的操作，那么就需要单独的设置访问器与修改器了
+
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'First',
+            lastName: 'Shuai'
+        },
+        computed: {
+            fullName: {
+                get: function () {
+                    return this.firstName + '+' + this.lastName;
+                },
+                set: function (newValue) {
+                    var names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
+                }
+            },
+            xsh: function () {
+                return 'xtt';
+            }
+        }
+    });
+</script>
+</html>

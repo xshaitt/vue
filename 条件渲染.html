@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1 v-if="ok">你能看到这行字吗？</h1>
+    <h1 v-else>看不到上面那行，肯定能看到这行！</h1>
+    <template v-if="ok">
+        <p>使用template打包一组元素</p>
+        <p>这是一组元素</p>
+        <p>这是一组元素</p>
+    </template>
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Z
+    </div>
+
+    <div>
+        <template v-if="loginType === 'username'">
+            <label>username</label>
+            <input placeholder="请输入你的用户名！">
+        </template>
+        <template v-else>
+            <label>email</label>
+            <input placeholder="请输入你的邮箱地址！">
+        </template>
+    </div>
+    vue会尽可能的高效的去渲染模板，所以能复用的元素都会尽可能的去复用，那么也就是说对于上面这两个template，loginType切换的只是placeholder
+    属性而已，而不会切换input的值
+    <div>
+        <template v-if="loginType === 'username'">
+            <label>用户名</label>
+            <input placeholder="请输入用户名" key="username-input">
+        </template>
+        <template v-else>
+            <label>邮箱</label>
+            <input placeholder="请输入你的邮箱地址" key="email-input">
+        </template>
+    </div>
+    如果使用key属性声明这两个元素是独立的话，那么vue将不会复用这两个元素
+    <h1 v-show="show">show</h1>
+    v-if与v-show的对比
+    v-if是真正的条件渲染，会根据条件的值变换而适当的创建与销毁元素，而v-show仅仅是通过css样式来显示与隐藏样式
+    v-if也是惰性的，如果在初始渲染时条件就为假，则直到第一次为真时，才会开始渲染，
+    v-show则是不管初始渲染的条件是什么，在渲染条件的值变化时，都会基于css样式去渲染元素
+    所以，一般来说，v-if有更高的切换开销，而v-show有更高的初始开销，如果在运行过程当中需要频繁的创建销毁元素的话，则用v-show更占优势
+    如果在运行时条件不太可能改变的话，那么使用v-if较好
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            ok: true,
+            type: 'O',
+            loginType: 'username',
+            show: true
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <!--最常见的绑定数据的形式，如果message属性的值变动，则此处显示的内容也会跟着变动-->
+    <span v-once>{{message}}</span>
+    <!--如果不需要把此处显示的内容随着属性的值变动就使用v-once指令，声明一下-->
+    <ol v-html="li">
+        <!--默认{{}}会转义html相关字符，如果需要显示为html原本的意义，使用v-html指令声明-->
+    </ol>
+    <!--<p attr="{{message}}"></p>-->
+    <!--Mustache不能在html属性中使用-->
+    <p>{{number+6}}</p>
+    <!--在模板当中可以直接使用表达式，但注意的是，也就只是表达式-->
+    <span v-if="seen">你不一定看得到我</span>
+    <!--带有v-前缀的是特殊的属性-指令属性赋予DOM某些行为或者说将某些行为应用到DOM上-->
+    <a v-bind:href="url">这是一个链接</a>
+    <!--一些指令可以指定参数，在指令之后用:指明，例如v-bind可以用来更新HTML属性-->
+    <p>{{number|xshaitt}}</p>
+    <!--使用过滤器-->
+    <a :href="url">这还是一个链接</a>
+    <!-- :href是v-bind的缩写 -->
+    <!--<button @click="doClick"></button>-->
+    <!-- @click是v-on的缩写 -->
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'xshaitt',
+            li: '<li>xxxxxx</li><li>xxxxxx</li><li>xxxxxx</li><li>xxxxxx</li>',
+            number: 4,
+            seen: true,
+            url: 'https://www.baidu.com'
+        },
+        filters: {
+            xshaitt: function (value) {
+                return value + 'xshaitt';
+            }
+        }
+    })
+</script>
+</html>

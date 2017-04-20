@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+</div>
+</body>
+<script>
+    var data = {a: 1};
+    var vm = new Vue({
+        data: data
+    });
+    var app = new Vue({
+        el: '#app'
+    });
+    data.a = 'xshaitt';
+    //实例会代理data对象里的所有的属性
+//    console.log(vm.a);
+    var gz = new Vue({
+        data: {
+            message: 'xshaitt'
+        },
+        created: function () {
+            console.log(this.message);
+        }
+        //给此实例绑定一个创建钩子
+    })
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span v-bind:class="{active:isActive,'alert-danger':hasError}">传对象绑定语法</span>
+    <span v-bind:class="classObj">直接传对象绑定语法</span>
+    <span v-bind:class="classObject">使用计算属性返回对象绑定class</span>
+    <span v-bind:class="[activeClass,errorClass]">使用数组绑定class列表</span>
+    <span v-bind:class="[isActive?activeClass:'',errorClass]">在数组中使用三元运算符</span>
+    <span v-bind:class="[{active:isActive},errorClass]">在数组中使用对象</span>
+    <my-component v-bind:class="[activeClass,errorClass]" v-bind:style="{color:'red'}"></my-component>
+    <span v-bind:style="styleObj">使用传对象的方式绑定style</span>
+</div>
+
+</body>
+<script>
+    Vue.component('my-component', {
+        template: '<p class="foo bar">这里是一个组件</p>'
+    });
+    //    一定要注意这个组件有先后顺序之后，如果在使用前没有先注册的话，那么就会报错
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            hasError: false,
+            classObj: {
+                active: true,
+                'alert-danger': false
+            },
+            activeClass: 'active',
+            errorClass: 'error',
+            styleObj: {
+                color: 'red',
+                fontSize: '18px'
+            }
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.isActive && this.hasError,
+                    'alert-danger': this.isActive || this.hasError
+                }
+            }
+        }
+    });
+</script>
+</html>

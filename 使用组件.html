@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-component></my-component>
+</div>
+<div id="app-2">
+    我也可以使用组件：
+    <my-component></my-component>
+    <!--<child-component></child-component>-->
+    <!--局部注册的组件不能在这个地方使用-->
+</div>
+<div id="app-3">
+    我使用的是局部注册的组件：
+    <child-component></child-component>
+</div>
+</body>
+<script>
+    Vue.component('my-component', {
+        template: '<span>我是一个组件</span>'
+    });
+    var child = {
+        template: '<span>我是局部注册的组件</span>'
+    };
+    var app3 = new Vue({
+        el: '#app-3',
+        components: {
+            'child-component': child
+        }
+    });
+    //注册全局组件，在注册之前，不能使用此组件，注册之后便可以在父实例的模块中以自定义元素的形式使用了
+    var vm = new Vue({
+        el: '#app'
+    });
+    var app2 = new Vue({
+        el: '#app-2'
+    });
+</script>
+</html>

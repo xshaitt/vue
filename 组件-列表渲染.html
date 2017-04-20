@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input v-model="newLi" v-on:keyup.enter="addNewLi" placeholder="添加一个新的li">
+    <ul>
+        <li v-for="(li,index) in lis">
+            {{li}}
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            newLi: '',
+            lis: [
+                '第一行',
+                '第二行',
+                '第三行',
+                '第四行'
+            ]
+        },
+        methods: {
+            addNewLi: function () {
+                this.lis.push(this.newLi);
+                this.newLi = '';
+            }
+        }
+    });
+</script>
+</html>

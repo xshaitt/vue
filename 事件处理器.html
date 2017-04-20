@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="++count">增加1</button>
+    <p>这个按钮已经被点击了{{count}}</p>
+    在指令里面可以直接运行代码
+</div>
+<div id="app-2">
+    <button v-on:click="message('xshaitt')">点我</button>
+    除了可以直接运行代码还可以调用methods属性里已经注册了的方法，并且可能传递参数过去
+</div>
+<div id="app-3">
+    <button v-on:click="message('xshaitt',$event)">点我</button>
+    可以使用$event特殊变量来访问原生DOM事件
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            count: 0
+        }
+    });
+    var app2 = new Vue({
+        el: '#app-2',
+        methods: {
+            message: function (message) {
+                alert(message);
+            }
+        }
+    });
+    var app3 = new Vue({
+        el: '#app-3',
+        methods: {
+            message: function (message, event) {
+                alert(event);
+            }
+        }
+    });
+</script>
+</html>
