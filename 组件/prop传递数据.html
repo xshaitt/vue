@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <child message="xttaish"></child>
+</div>
+</body>
+<script>
+    Vue.component('child', {
+        props: ['message'],
+        template: '<span>{{message}}</span>',
+        data: function () {
+            return {
+                pMessage: 'xshaitt'
+            }
+        }
+    });
+    var vm = new Vue({
+        el: '#app'
+    });
+</script>
+</html>
