@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message">
+    <child v-bind:child-message="message"></child>
+    <!--如果在子组件的属性里使用到prop需要转换成短横线的形式-->
+
+</div>
+</body>
+<script>
+    Vue.component('child', {
+        props: ['childMessage'],//通过props使用父组件的数据
+        template: '<span>{{childMessage}}</span>'
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'xshaitt'
+        }
+    });
+    //在我看来这个vm就相当于父组件吧，虽然严格来讲这个应该是一个父实例
+    //
+</script>
+</html>
