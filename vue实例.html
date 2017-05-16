@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>vue</title>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.3.3/vue.js"></script>
 </head>
 <body>
 <div id="app">
+    {{message}}
 </div>
 </body>
 <script>
@@ -15,11 +16,14 @@
         data: data
     });
     var app = new Vue({
+        data: {
+            message: 'xsh'
+        },
         el: '#app'
     });
     data.a = 'xshaitt';
     //实例会代理data对象里的所有的属性
-//    console.log(vm.a);
+    //    console.log(vm.a);
     var gz = new Vue({
         data: {
             message: 'xshaitt'
